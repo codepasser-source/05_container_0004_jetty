@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Required minimal context configuration :                        -->
+  <!--  + contextPath                                                  -->
+  <!--  + war OR resourceBase                                          -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Set name="contextPath">/</Set>
+  <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps/test.war</Set>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Optional context configuration                                  -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Set name="extractWAR">true</Set>
+  <Set name="copyWebDir">false</Set>
+  <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/etc/webdefault.xml</Set>
+  <Set name="overrideDescriptor"><SystemProperty name="jetty.home" default="."/>/contexts/test.d/override-web.xml</Set>
+
+
+	<!-- datasource -->
+	<New id="datasource" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>datasource</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">com.mysql.jdbc.Driver</Set>
+				<Set name="url">jdbc:mysql://10.1.132.58/rrscommunity</Set>
+				<Set name="username">root</Set>
+				<Set name="password">Sa*963.-+</Set>
+				<Set name="maxActive">10</Set>
+			</New>
+		</Arg>
+	</New>
+
+	<New id="datasource-read" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>datasource-read</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">com.mysql.jdbc.Driver</Set>
+				<Set name="url">jdbc:mysql://10.1.132.55/rrscommunity</Set>
+				<Set name="username">dber</Set>
+				<Set name="password">rrs_dber_pw</Set>
+				<Set name="maxActive">10</Set>
+			</New>
+		</Arg>
+	</New>
+
+	<New id="datasource-write" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>datasource-write</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">com.mysql.jdbc.Driver</Set>
+				<Set name="url">jdbc:mysql://10.1.132.58/rrscommunity</Set>
+				<Set name="username">dber</Set>
+				<Set name="password">rrs_dber_pw</Set>
+				<Set name="maxActive">10</Set>
+			</New>
+		</Arg>
+	</New>
+</Configure>  
